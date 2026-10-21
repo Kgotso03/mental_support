@@ -1,0 +1,944 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
+  <diagram id="L6n-yxrPxeo8X6feQj-A" name="Page-1">
+    <mxGraphModel dx="1268" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="p1_title" value="Flow 1: User Registration &amp; Welcome Email" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#0f766e;" parent="1" vertex="1">
+          <mxGeometry x="200" y="20" width="600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1_actor_user" value="User (Browser)" style="shape=mxgraph.flowchart.actor;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="80" y="80" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p1_actor_js" value="js/app.js" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="280" y="90" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1_actor_register" value="auth/register.php" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="480" y="90" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1_actor_db" value="MySQL Database" style="shape=mxgraph.flowchart.database;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="700" y="80" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p1_actor_mail" value="config/mail.php (PHPMailer)" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="880" y="90" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1_line_user" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="110" y="140" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="110" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_line_js" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="330" y="130" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="330" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_line_register" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="540" y="130" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="540" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_line_db" value="" style="endArrow=none;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="730" y="140" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="730" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_line_mail" value="" style="endArrow=none;dashed=1;strokeColor=#9673a6;" parent="1" edge="1">
+          <mxGeometry x="950" y="130" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="950" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_s1" value="1. Fill &amp; submit registration form" style="endArrow=block;endFill=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="110" y="180" relative="1" as="geometry">
+            <mxPoint x="330" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_s2" value="2. Validate inputs, POST /auth/register.php" style="endArrow=block;endFill=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="330" y="220" relative="1" as="geometry">
+            <mxPoint x="540" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_s3" value="3. Check email uniqueness &amp; Student ID" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="540" y="260" relative="1" as="geometry">
+            <mxPoint x="730" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_s4" value="4. Email not found" style="endArrow=block;endFill=1;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="730" y="300" relative="1" as="geometry">
+            <mxPoint x="540" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_s5" value="5. BEGIN TRANSACTION" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="540" y="340" relative="1" as="geometry">
+            <mxPoint x="730" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_s6" value="6. INSERT INTO users &amp; profile table" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="540" y="380" relative="1" as="geometry">
+            <mxPoint x="730" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_s7" value="7. COMMIT — success" style="endArrow=block;endFill=1;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="730" y="420" relative="1" as="geometry">
+            <mxPoint x="540" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_s8" value="8. require mail.php &amp; call send_email()" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="540" y="460" relative="1" as="geometry">
+            <mxPoint x="950" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_s9" value="9. PHPMailer → Gmail SMTP (TLS 587) → Send Welcome Email" style="endArrow=block;endFill=1;strokeColor=#9673a6;" parent="1" edge="1">
+          <mxGeometry x="950" y="500" relative="1" as="geometry">
+            <mxPoint x="1120" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_gmail" value="Gmail SMTP Server" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1120" y="481" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1_s10" value="10. Email delivered to user inbox" style="endArrow=block;endFill=1;dashed=1;strokeColor=#9673a6;" parent="1" edge="1">
+          <mxGeometry x="950" y="540" relative="1" as="geometry">
+            <mxPoint x="540" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_s11" value="11. JSON {success:true, message:&#39;Registration successful!&#39;}" style="endArrow=block;endFill=1;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="540" y="580" relative="1" as="geometry">
+            <mxPoint x="330" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1_s12" value="12. Show success alert, redirect to login" style="endArrow=block;endFill=1;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="330" y="620" relative="1" as="geometry">
+            <mxPoint x="110" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_title" value="Flow 2: Student Appointment Booking &amp; Counselor Notification Email" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#0f766e;" parent="1" vertex="1">
+          <mxGeometry x="200" y="880" width="900" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2_actor_student" value="Student (Browser)" style="shape=mxgraph.flowchart.actor;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="940" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p2_actor_js" value="js/app.js" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="230" y="950" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2_actor_book" value="student/book_appointment.php" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="410" y="950" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2_actor_db2" value="MySQL Database" style="shape=mxgraph.flowchart.database;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="660" y="940" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p2_actor_mail2" value="config/mail.php" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="840" y="950" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2_line_student" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="1000" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="90" y="1720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_line_js" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="280" y="990" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="280" y="1720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_line_book" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="490" y="990" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="490" y="1720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_line_db2" value="" style="endArrow=none;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="690" y="1000" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="690" y="1720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_line_mail2" value="" style="endArrow=none;dashed=1;strokeColor=#9673a6;" parent="1" edge="1">
+          <mxGeometry x="895" y="990" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="895" y="1720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s1" value="1. Fill booking form (counselor, date, time, type)" style="endArrow=block;endFill=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="1040" relative="1" as="geometry">
+            <mxPoint x="280" y="1040" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s2" value="2. POST /student/book_appointment.php" style="endArrow=block;endFill=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="280" y="1080" relative="1" as="geometry">
+            <mxPoint x="490" y="1080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s3" value="3. Verify working hours (08:30–16:30) &amp; future date" style="endArrow=block;endFill=0;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="490" y="1120" relative="1" as="geometry">
+            <mxPoint x="490" y="1120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s3_note" value="[Self-check]" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#888888;" parent="1" vertex="1">
+          <mxGeometry x="530" y="1110" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="p2_s4" value="4. SELECT counselor active status" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="490" y="1160" relative="1" as="geometry">
+            <mxPoint x="690" y="1160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s5" value="5. COUNT daily bookings (max 9)" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="490" y="1200" relative="1" as="geometry">
+            <mxPoint x="690" y="1200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s6" value="6. COUNT overlapping 1-hour slots" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="490" y="1240" relative="1" as="geometry">
+            <mxPoint x="690" y="1240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s7" value="7. All checks pass — BEGIN TRANSACTION" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="490" y="1280" relative="1" as="geometry">
+            <mxPoint x="690" y="1280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s8" value="8. INSERT appointment (status=pending)" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="490" y="1320" relative="1" as="geometry">
+            <mxPoint x="690" y="1320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s9" value="9. INSERT notification for counselor" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="490" y="1360" relative="1" as="geometry">
+            <mxPoint x="690" y="1360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s10" value="10. COMMIT — success" style="endArrow=block;endFill=1;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="690" y="1400" relative="1" as="geometry">
+            <mxPoint x="490" y="1400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s11" value="11. send_email() → Student: Booking pending confirmation" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="490" y="1440" relative="1" as="geometry">
+            <mxPoint x="895" y="1440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s12" value="12. send_email() → Counselor: New booking request received" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="490" y="1480" relative="1" as="geometry">
+            <mxPoint x="895" y="1480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s13" value="13. Both emails dispatched via Gmail SMTP" style="endArrow=block;endFill=1;dashed=1;strokeColor=#9673a6;" parent="1" edge="1">
+          <mxGeometry x="895" y="1520" relative="1" as="geometry">
+            <mxPoint x="490" y="1520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s14" value="14. JSON {success:true}" style="endArrow=block;endFill=1;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="490" y="1560" relative="1" as="geometry">
+            <mxPoint x="280" y="1560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2_s15" value="15. Display confirmation, refresh appointments tab" style="endArrow=block;endFill=1;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="280" y="1600" relative="1" as="geometry">
+            <mxPoint x="90" y="1600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_title" value="Flow 3: Counselor Marks Session Completed &amp; Status Update Email" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#0f766e;" parent="1" vertex="1">
+          <mxGeometry x="200" y="1760" width="900" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3_actor_counselor" value="Counselor (Browser)" style="shape=mxgraph.flowchart.actor;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="1820" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p3_actor_js" value="js/app.js" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="240" y="1830" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3_actor_api" value="counselor/update_appointment.php" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="430" y="1830" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3_actor_db3" value="MySQL Database" style="shape=mxgraph.flowchart.database;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="680" y="1820" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p3_actor_mail3" value="config/mail.php" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="860" y="1830" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3_line_counselor" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="1880" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="90" y="2500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_line_js" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="1870" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="290" y="2500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_line_api" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="1870" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="510" y="2500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_line_db3" value="" style="endArrow=none;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="710" y="1880" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="710" y="2500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_line_mail3" value="" style="endArrow=none;dashed=1;strokeColor=#9673a6;" parent="1" edge="1">
+          <mxGeometry x="915" y="1870" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="915" y="2500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s1" value="1. Click &#39;Mark Completed&#39;" style="endArrow=block;endFill=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="1920" relative="1" as="geometry">
+            <mxPoint x="290" y="1920" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s2" value="2. Open #completeSessionModal" style="endArrow=block;endFill=1;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="1960" relative="1" as="geometry">
+            <mxPoint x="90" y="1960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s3" value="3. Choose: Yes/No Recommend Group" style="endArrow=block;endFill=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="2000" relative="1" as="geometry">
+            <mxPoint x="290" y="2000" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s4" value="4. POST /counselor/update_appointment.php {status:&#39;completed&#39;, recommend_group:true}" style="endArrow=block;endFill=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="2040" relative="1" as="geometry">
+            <mxPoint x="510" y="2040" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s5" value="5. Verify counselor session &amp; ownership" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="2080" relative="1" as="geometry">
+            <mxPoint x="710" y="2080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s6" value="6. BEGIN TRANSACTION" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="2120" relative="1" as="geometry">
+            <mxPoint x="710" y="2120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s7" value="7. UPDATE appointments SET status=&#39;completed&#39;" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="2160" relative="1" as="geometry">
+            <mxPoint x="710" y="2160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s8" value="8. UPDATE students_profile: group_recommended=1" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="2200" relative="1" as="geometry">
+            <mxPoint x="710" y="2200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s9" value="9. INSERT notifications for student" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="2240" relative="1" as="geometry">
+            <mxPoint x="710" y="2240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s10" value="10. COMMIT" style="endArrow=block;endFill=1;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="710" y="2280" relative="1" as="geometry">
+            <mxPoint x="510" y="2280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s11" value="11. send_email() → Student: Session Accepted/Completed + Group Recommendation" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="2320" relative="1" as="geometry">
+            <mxPoint x="915" y="2320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s12" value="12. Email dispatched via Gmail SMTP" style="endArrow=block;endFill=1;dashed=1;strokeColor=#9673a6;" parent="1" edge="1">
+          <mxGeometry x="915" y="2360" relative="1" as="geometry">
+            <mxPoint x="510" y="2360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s13" value="13. JSON {success:true}" style="endArrow=block;endFill=1;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="2400" relative="1" as="geometry">
+            <mxPoint x="290" y="2400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3_s14" value="14. Update UI appointment list" style="endArrow=block;endFill=1;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="2440" relative="1" as="geometry">
+            <mxPoint x="90" y="2440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_title" value="Flow 4: Automatic Session Lifecycle Sync &amp; Email Notifications" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#0f766e;" parent="1" vertex="1">
+          <mxGeometry x="200" y="2560" width="900" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p4_actor_any" value="Any User / Request" style="shape=mxgraph.flowchart.actor;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="2620" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p4_actor_db4" value="config/db.php" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="240" y="2630" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p4_actor_mysql" value="MySQL Database" style="shape=mxgraph.flowchart.database;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="480" y="2620" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p4_actor_mail4" value="config/mail.php" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="680" y="2630" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p4_line_any" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="2680" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="90" y="3320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_line_db4" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="300" y="2670" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="300" y="3320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_line_mysql" value="" style="endArrow=none;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="510" y="2680" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="510" y="3320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_line_mail4" value="" style="endArrow=none;dashed=1;strokeColor=#9673a6;" parent="1" edge="1">
+          <mxGeometry x="735" y="2670" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="735" y="3320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_s1" value="1. Any page/endpoint triggers get_db_connection()" style="endArrow=block;endFill=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="2720" relative="1" as="geometry">
+            <mxPoint x="300" y="2720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_s2_note" value="Phase 1: Auto-Complete" style="text;html=1;strokeColor=none;fillColor=#d5e8d4;align=left;fontSize=10;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="160" y="2760" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="p4_s2" value="2. SELECT sessions: accepted + started + time+1hr &lt;= NOW()" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="300" y="2790" relative="1" as="geometry">
+            <mxPoint x="510" y="2790" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_s3" value="3. UPDATE status=&#39;completed&#39;" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="300" y="2830" relative="1" as="geometry">
+            <mxPoint x="510" y="2830" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_s4" value="4. INSERT notifications + send_email() to Student (auto-complete)" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="300" y="2870" relative="1" as="geometry">
+            <mxPoint x="735" y="2870" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_s5_note" value="Phase 2: Auto-Missing" style="text;html=1;strokeColor=none;fillColor=#f8cecc;align=left;fontSize=10;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="160" y="2920" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="p4_s5" value="5. SELECT sessions: pending/accepted + NOT started + time+15min &lt;= NOW()" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="300" y="2950" relative="1" as="geometry">
+            <mxPoint x="510" y="2950" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_s6" value="6. UPDATE status=&#39;missing&#39;" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="300" y="2990" relative="1" as="geometry">
+            <mxPoint x="510" y="2990" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_s7" value="7. INSERT notifications + send_email() → Student (session missed)" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="300" y="3030" relative="1" as="geometry">
+            <mxPoint x="735" y="3030" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_s8" value="8. INSERT notifications + send_email() → Counselor (session missed)" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="300" y="3070" relative="1" as="geometry">
+            <mxPoint x="735" y="3070" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_s9" value="9. All emails dispatched via Gmail SMTP" style="endArrow=block;endFill=1;dashed=1;strokeColor=#9673a6;" parent="1" edge="1">
+          <mxGeometry x="735" y="3110" relative="1" as="geometry">
+            <mxPoint x="300" y="3110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p4_s10" value="10. Returns PDO handler. Page loads normally." style="endArrow=block;endFill=1;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="300" y="3150" relative="1" as="geometry">
+            <mxPoint x="90" y="3150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_title" value="Flow 5: Community Group Discussion — Send Message &amp; Polling" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#0f766e;" parent="1" vertex="1">
+          <mxGeometry x="200" y="3380" width="900" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p5_actor_part" value="Participant" style="shape=mxgraph.flowchart.actor;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="3440" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p5_actor_js" value="js/app.js" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="240" y="3450" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p5_actor_send" value="chat/send_message.php" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="430" y="3450" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p5_actor_get" value="chat/get_messages.php" style="rounded=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="660" y="3450" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p5_actor_db5" value="MySQL Database" style="shape=mxgraph.flowchart.database;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="900" y="3440" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p5_line_part" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="3500" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="90" y="4060" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_line_js" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="3490" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="290" y="4060" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_line_send" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="500" y="3490" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="500" y="4060" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_line_get" value="" style="endArrow=none;dashed=1;strokeColor=#d79b00;" parent="1" edge="1">
+          <mxGeometry x="730" y="3490" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="730" y="4060" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_line_db5" value="" style="endArrow=none;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="930" y="3500" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="930" y="4060" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_s1_note" value="Send Sequence" style="text;html=1;strokeColor=none;fillColor=#d5e8d4;align=left;fontSize=10;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="3530" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="p5_s1" value="1. Type message, click Send" style="endArrow=block;endFill=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="3560" relative="1" as="geometry">
+            <mxPoint x="290" y="3560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_s2" value="2. Invoke sendGroupMessage()" style="endArrow=block;endFill=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="3600" relative="1" as="geometry">
+            <mxPoint x="500" y="3600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_s3" value="3. Validate session &amp; role" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="500" y="3640" relative="1" as="geometry">
+            <mxPoint x="930" y="3640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_s4" value="4. INSERT INTO group_discussions (sender_id, content)" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="500" y="3680" relative="1" as="geometry">
+            <mxPoint x="930" y="3680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_s5" value="5. JSON {success:true}" style="endArrow=block;endFill=1;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="500" y="3720" relative="1" as="geometry">
+            <mxPoint x="290" y="3720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_s6" value="6. Clear input &amp; call loadGroupMessages()" style="endArrow=block;endFill=0;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="3760" relative="1" as="geometry">
+            <mxPoint x="290" y="3760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_s7_note" value="Polling Loop (every 4 seconds)" style="text;html=1;strokeColor=none;fillColor=#fff2cc;align=left;fontSize=10;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="3790" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="p5_s7" value="7. GET /chat/get_messages.php?action=group" style="endArrow=block;endFill=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="3820" relative="1" as="geometry">
+            <mxPoint x="730" y="3820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_s8" value="8. SELECT messages LEFT JOIN users, students_profile, counselors (COALESCE names)" style="endArrow=block;endFill=1;strokeColor=#d79b00;" parent="1" edge="1">
+          <mxGeometry x="730" y="3860" relative="1" as="geometry">
+            <mxPoint x="930" y="3860" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_s9" value="9. Returns message array [{id, sender_name, sender_role, content, timestamp}]" style="endArrow=block;endFill=1;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="930" y="3900" relative="1" as="geometry">
+            <mxPoint x="730" y="3900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_s10" value="10. JSON array response to js/app.js" style="endArrow=block;endFill=1;dashed=1;strokeColor=#d79b00;" parent="1" edge="1">
+          <mxGeometry x="730" y="3940" relative="1" as="geometry">
+            <mxPoint x="290" y="3940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_s11" value="11. Render bubbles in #discussionMessagesBox, auto-scroll to bottom" style="endArrow=block;endFill=1;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="3980" relative="1" as="geometry">
+            <mxPoint x="90" y="3980" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p5_s12_note" value="[Repeats every 4 seconds via setInterval]" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#888888;" parent="1" vertex="1">
+          <mxGeometry x="100" y="4000" width="260" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- Flow 6: Combined Self-Assessment Submission                  -->
+        <!-- ============================================================ -->
+        <mxCell id="p6_title" value="Flow 6: Combined Self-Assessment Submission &amp; Analysis" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#0f766e;" parent="1" vertex="1">
+          <mxGeometry x="200" y="4150" width="900" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p6_actor_student" value="Student" style="shape=mxgraph.flowchart.actor;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="4210" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p6_actor_js" value="js/app.js" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="240" y="4220" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p6_actor_api" value="assessment/submit_assessment.php" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="430" y="4220" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p6_actor_db" value="MySQL Database" style="shape=mxgraph.flowchart.database;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="900" y="4210" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p6_line_student" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="4270" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="90" y="4800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p6_line_js" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="4270" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="290" y="4800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p6_line_api" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="530" y="4270" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="530" y="4800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p6_line_db" value="" style="endArrow=none;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="930" y="4270" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="930" y="4800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="p6_s1" value="1. Complete 37 questions &amp; submit" style="endArrow=block;endFill=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="4310" relative="1" as="geometry">
+            <mxPoint x="290" y="4310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p6_s2" value="2. POST /submit_assessment.php {answers: [...]}" style="endArrow=block;endFill=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="4350" relative="1" as="geometry">
+            <mxPoint x="530" y="4350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p6_s3" value="3. Validate session, boundaries &amp; length" style="endArrow=block;endFill=0;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="530" y="4390" relative="1" as="geometry">
+            <mxPoint x="530" y="4390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p6_s4" value="4. Slice into per-disorder sub-arrays &amp; compute scores" style="endArrow=block;endFill=0;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="530" y="4430" relative="1" as="geometry">
+            <mxPoint x="530" y="4430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p6_s5" value="5. Check &amp; align schema (ADD COLUMN if not exists)" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="530" y="4470" relative="1" as="geometry">
+            <mxPoint x="930" y="4470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p6_s6" value="6. Schema ready" style="endArrow=block;endFill=1;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="930" y="4510" relative="1" as="geometry">
+            <mxPoint x="530" y="4510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p6_s7" value="7. INSERT INTO self_assessments (answers, scores, categories)" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="530" y="4550" relative="1" as="geometry">
+            <mxPoint x="930" y="4550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p6_s8" value="8. Success (lastInsertId)" style="endArrow=block;endFill=1;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="930" y="4590" relative="1" as="geometry">
+            <mxPoint x="530" y="4590" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p6_s9" value="9. JSON Response {success: true, data: {score: X, details: {...}}}" style="endArrow=block;endFill=1;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="530" y="4630" relative="1" as="geometry">
+            <mxPoint x="290" y="4630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p6_s10" value="10. Render clinical feedback &amp; charts" style="endArrow=block;endFill=1;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="4670" relative="1" as="geometry">
+            <mxPoint x="90" y="4670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- Flow 7: User Login / Authentication                          -->
+        <!-- ============================================================ -->
+        <mxCell id="p7_title" value="Flow 7: User Login &amp; Role-Based Authentication" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#0f766e;" parent="1" vertex="1">
+          <mxGeometry x="200" y="4850" width="900" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p7_actor_user" value="User (Browser)" style="shape=mxgraph.flowchart.actor;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="4910" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p7_actor_js" value="js/app.js" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="240" y="4920" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p7_actor_api" value="auth/login.php" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="430" y="4920" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p7_actor_session" value="config/session.php" style="rounded=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="650" y="4920" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p7_actor_db" value="MySQL Database" style="shape=mxgraph.flowchart.database;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="900" y="4910" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p7_line_user" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="4970" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="90" y="5640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_line_js" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="4960" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="290" y="5640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_line_api" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="495" y="4960" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="495" y="5640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_line_session" value="" style="endArrow=none;dashed=1;strokeColor=#d79b00;" parent="1" edge="1">
+          <mxGeometry x="715" y="4960" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="715" y="5640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_line_db" value="" style="endArrow=none;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="930" y="4970" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="930" y="5640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="p7_s1" value="1. Enter email &amp; password, click Login" style="endArrow=block;endFill=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="5010" relative="1" as="geometry">
+            <mxPoint x="290" y="5010" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_s2" value="2. Validate inputs, POST /auth/login.php {email, password}" style="endArrow=block;endFill=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="5050" relative="1" as="geometry">
+            <mxPoint x="495" y="5050" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_s3" value="3. require config/session.php (start_secure_session)" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="495" y="5090" relative="1" as="geometry">
+            <mxPoint x="715" y="5090" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_s4" value="4. SELECT id, password_hash, role FROM users WHERE email = ?" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="495" y="5130" relative="1" as="geometry">
+            <mxPoint x="930" y="5130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_s5" value="5. Returns user record or null" style="endArrow=block;endFill=1;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="930" y="5170" relative="1" as="geometry">
+            <mxPoint x="495" y="5170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_s6_note" value="[If no user OR password_verify() fails → HTTP 401]" style="text;html=1;strokeColor=none;fillColor=#f8cecc;align=left;fontSize=10;fontStyle=2;" parent="1" vertex="1">
+          <mxGeometry x="300" y="5190" width="310" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="p7_s7" value="6. password_verify() passes — fetch role profile" style="endArrow=block;endFill=0;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="495" y="5220" relative="1" as="geometry">
+            <mxPoint x="495" y="5220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_s7b" value="7. [Counselor] Check status = 'active' — if 'pending' → HTTP 403" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="495" y="5260" relative="1" as="geometry">
+            <mxPoint x="930" y="5260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_s8" value="8. Counselor status active" style="endArrow=block;endFill=1;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="930" y="5300" relative="1" as="geometry">
+            <mxPoint x="495" y="5300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_s9" value="9. Set $_SESSION (user_id, role, name, last_activity)" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="495" y="5340" relative="1" as="geometry">
+            <mxPoint x="715" y="5340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_s10" value="10. Session stored" style="endArrow=block;endFill=1;dashed=1;strokeColor=#d79b00;" parent="1" edge="1">
+          <mxGeometry x="715" y="5380" relative="1" as="geometry">
+            <mxPoint x="495" y="5380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_s11" value="11. JSON {success:true, data:{role, redirect:'dashboard_[role].html'}}" style="endArrow=block;endFill=1;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="495" y="5420" relative="1" as="geometry">
+            <mxPoint x="290" y="5420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p7_s12" value="12. window.location = dashboard_[role].html" style="endArrow=block;endFill=1;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="5460" relative="1" as="geometry">
+            <mxPoint x="90" y="5460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- Flow 8: Admin — Counselor Approval & User Deletion           -->
+        <!-- ============================================================ -->
+        <mxCell id="p8_title" value="Flow 8: Admin — Counselor Approval &amp; User Account Deletion" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#0f766e;" parent="1" vertex="1">
+          <mxGeometry x="200" y="5700" width="1000" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p8_actor_admin" value="Admin (Browser)" style="shape=mxgraph.flowchart.actor;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="5760" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p8_actor_js" value="js/app.js" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="240" y="5770" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p8_actor_api" value="admin/manage_users.php" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="430" y="5770" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p8_actor_mail" value="config/mail.php" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="680" y="5770" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p8_actor_db" value="MySQL Database" style="shape=mxgraph.flowchart.database;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="900" y="5760" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p8_line_admin" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="5820" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="90" y="6540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_line_js" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="5810" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="290" y="6540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_line_api" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="5810" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="510" y="6540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_line_mail" value="" style="endArrow=none;dashed=1;strokeColor=#9673a6;" parent="1" edge="1">
+          <mxGeometry x="735" y="5810" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="735" y="6540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_line_db" value="" style="endArrow=none;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="930" y="5820" relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="930" y="6540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="p8_s0_note" value="Part A: Counselor Approval" style="text;html=1;strokeColor=none;fillColor=#d5e8d4;align=left;fontSize=10;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="5845" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="p8_s1" value="1. Admin views pending counselors list" style="endArrow=block;endFill=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="5875" relative="1" as="geometry">
+            <mxPoint x="290" y="5875" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s2" value="2. GET /admin/manage_users.php?role=counselor" style="endArrow=block;endFill=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="5915" relative="1" as="geometry">
+            <mxPoint x="510" y="5915" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s3" value="3. Verify admin session &amp; role" style="endArrow=block;endFill=0;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="5955" relative="1" as="geometry">
+            <mxPoint x="510" y="5955" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s4" value="4. SELECT users JOIN counselors WHERE role='counselor'" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="5995" relative="1" as="geometry">
+            <mxPoint x="930" y="5995" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s5" value="5. Returns counselor list (name, specialty, status)" style="endArrow=block;endFill=1;dashed=1;strokeColor=#b85450;" parent="1" edge="1">
+          <mxGeometry x="930" y="6035" relative="1" as="geometry">
+            <mxPoint x="290" y="6035" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s6" value="6. Click 'Approve' on a pending counselor" style="endArrow=block;endFill=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="6075" relative="1" as="geometry">
+            <mxPoint x="290" y="6075" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s7" value="7. POST {action:'approve_counselor', user_id}" style="endArrow=block;endFill=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="6115" relative="1" as="geometry">
+            <mxPoint x="510" y="6115" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s8" value="8. BEGIN TRANSACTION" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="6155" relative="1" as="geometry">
+            <mxPoint x="930" y="6155" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s9" value="9. UPDATE counselors SET status='active'" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="6195" relative="1" as="geometry">
+            <mxPoint x="930" y="6195" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s10" value="10. INSERT notification for counselor + COMMIT" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="6235" relative="1" as="geometry">
+            <mxPoint x="930" y="6235" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s10b" value="11. send_email() — Approval notification to Counselor" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="6275" relative="1" as="geometry">
+            <mxPoint x="735" y="6275" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s11" value="12. JSON {success:true, message:'Approved'}" style="endArrow=block;endFill=1;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="6315" relative="1" as="geometry">
+            <mxPoint x="290" y="6315" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="p8_s12_note" value="Part B: User Account Deletion" style="text;html=1;strokeColor=none;fillColor=#f8cecc;align=left;fontSize=10;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="6345" width="220" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="p8_s12" value="13. Click 'Delete User' + enter admin_password &amp; reason" style="endArrow=block;endFill=1;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry x="90" y="6375" relative="1" as="geometry">
+            <mxPoint x="290" y="6375" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s13" value="14. POST {action:'delete_user', user_id, admin_password, reason}" style="endArrow=block;endFill=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="6415" relative="1" as="geometry">
+            <mxPoint x="510" y="6415" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s14" value="15. Verify admin_password — if wrong → HTTP 403" style="endArrow=block;endFill=0;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="6455" relative="1" as="geometry">
+            <mxPoint x="510" y="6455" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s15" value="16. DELETE FROM users WHERE id=? (CASCADE handles related tables)" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="6495" relative="1" as="geometry">
+            <mxPoint x="930" y="6495" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s16" value="17. INSERT INTO deletion_logs (table, record_id, deleted_by, reason)" style="endArrow=block;endFill=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="6535" relative="1" as="geometry">
+            <mxPoint x="930" y="6535" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s17" value="18. JSON {success:true, 'User deleted and action logged'}" style="endArrow=block;endFill=1;dashed=1;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry x="510" y="6575" relative="1" as="geometry">
+            <mxPoint x="290" y="6575" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p8_s18" value="19. Refresh users table in Admin Dashboard" style="endArrow=block;endFill=1;dashed=1;strokeColor=#82b366;" parent="1" edge="1">
+          <mxGeometry x="290" y="6615" relative="1" as="geometry">
+            <mxPoint x="90" y="6615" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

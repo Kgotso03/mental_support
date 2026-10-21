@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Mental Support</title>
+    <link rel="stylesheet" href="css/styles.css?v=15">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+        Student
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; position: relative;">
+            <button class="btn-secondary" onclick="goBackStep()">&larr; Back</button>
+            <!-- Notification Bell -->
+            <div id="notificationBellIcon" onclick="toggleNotificationsDropdown()" style="cursor: pointer; position: relative; padding: 6px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #ffffff;"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+                <div id="notificationBadge" style="position: absolute; top: -2px; right: -2px; width: 16px; height: 16px; border-radius: 50%; background: var(--danger); color: white; font-size: 10px; font-weight: 700; display: none; align-items: center; justify-content: center;">0</div>
+            </div>
+            
+            <!-- Notifications Dropdown Box -->
+            <div class="notifications-dropdown" id="notificationsDropdown">
+                <!-- Populated via AJAX -->
+            </div>
+
+            <button class="btn-secondary" onclick="handleLogout()">Log Out</button>
+        </div>
+    </header>
+
+    <!-- Main Layout Grid -->
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <div class="glass-card sidebar">
+            <div class="sidebar-profile">
+                <div class="avatar-placeholder" id="avatarLetter">S</div>
+                <h3 id="userGreeting" style="font-weight: 700;">Student User</h3>
+                <span style="font-size: 12px; color: var(--primary);">Student Account</span>
+                <span id="userUniversity" style="font-size: 11px; color: var(--text-secondary); display: block; margin-top: 4px;"></span>
+            </div>
+            <div class="sidebar-menu">
+                <div class="sidebar-link active" data-tab="profileTab"><i data-lucide="layout-dashboard" style="width:18px;height:18px;"></i> Overview</div>
+                <div class="sidebar-link" data-tab="assessmentTab"><i data-lucide="clipboard-check" style="width:18px;height:18px;"></i> Self-Assessments</div>
+                <div class="sidebar-link" data-tab="appointmentsTab"><i data-lucide="calendar-check" style="width:18px;height:18px;"></i> Book Counselor</div>
+                <div class="sidebar-link" data-tab="chatTab"><i data-lucide="message-circle" style="width:18px;height:18px;"></i> Direct Messaging</div>
+                <div class="sidebar-link" data-tab="discussionTab"><i data-lucide="users" style="width:18px;height:18px;"></i> Community Discussions</div>
+                <div class="sidebar-link" data-tab="storiesTab"><i data-lucide="book-heart" style="width:18px;height:18px;"></i> Recovery Stories</div>
+                <div class="sidebar-link" data-tab="chatbotTab"><i data-lucide="bot" style="width:18px;height:18px;"></i> Support Chatbot</div>
+                <div class="sidebar-link" data-tab="settingsTab"><i data-lucide="settings" style="width:18px;height:18px;"></i> Settings</div>
+            </div>
+        </div>
+
+        <!-- Dashboard Pages Context -->
+        <div class="dashboard-content">
+            
+            <!-- OVERVIEW TAB -->
+            <div id="profileTab" class="tab-content active">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">Welcome Back!</h2>
+                <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 32px;">Access your mental health tools and resources below.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                    <!-- Self-Assessment Card -->
+                    <div class="glass-card" style="cursor: pointer; display: flex; flex-direction: column; gap: 14px;" onclick="document.querySelector('[data-tab=assessmentTab]').click()">
+                        <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(13, 148, 136, 0.1); display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                            <i data-lucide="clipboard-check" style="width:24px;height:24px;"></i>
+                        </div>
+                        <h3 style="font-size: 17px; font-weight: 700;">Self-Assessment</h3>
+                        <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5;">Take a comprehensive mental health screening covering anxiety, depression, stress, and more.</p>
+                    </div>
+
+                    <!-- Book Counselor Card -->
+                    <div class="glass-card" style="cursor: pointer; display: flex; flex-direction: column; gap: 14px;" onclick="document.querySelector('[data-tab=appointmentsTab]').click()">
+                        <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; color: var(--accent);">
+                            <i data-lucide="calendar-check" style="width:24px;height:24px;"></i>
+                        </div>
+                        <h3 style="font-size: 17px; font-weight: 700;">Book Counselor</h3>
+                        <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5;">Schedule a therapy session with a licensed counselor via video or live chat.</p>
+                    </div>
+
+                    <!-- Direct Messaging Card -->
+                    <div class="glass-card" style="cursor: pointer; display: flex; flex-direction: column; gap: 14px;" onclick="document.querySelector('[data-tab=chatTab]').click()">
+                        <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(139, 92, 246, 0.1); display: flex; align-items: center; justify-content: center; color: #8b5cf6;">
+                            <i data-lucide="message-circle" style="width:24px;height:24px;"></i>
+                        </div>
+                        <h3 style="font-size: 17px; font-weight: 700;">Direct Messaging</h3>
+                        <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5;">Chat securely with your assigned counselor in real-time private conversations.</p>
+                    </div>
+
+                    <!-- Community Discussions Card -->
+                    <div class="glass-card" style="cursor: pointer; display: flex; flex-direction: column; gap: 14px;" onclick="document.querySelector('[data-tab=discussionTab]').click()">
+                        <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(245, 158, 11, 0.1); display: flex; align-items: center; justify-content: center; color: #f59e0b;">
+                            <i data-lucide="users" style="width:24px;height:24px;"></i>
+                        </div>
+                        <h3 style="font-size: 17px; font-weight: 700;">Community Discussions</h3>
+                        <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5;">Join peer support conversations about college stress, studies, and mental wellness.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SELF ASSESSMENTS TAB -->
+            <div id="assessmentTab" class="tab-content">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 24px;">Mental Health Self-Assessment</h2>
+                
+                <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px;">
+                    <div>
+                        <!-- Assessment Type Selector Grid (Single Combined Assessment) -->
+                        <div id="assessmentSelectionGrid" style="margin-bottom: 24px;">
+                            <div class="glass-card" style="padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+                                <div style="display: flex; align-items: center; gap: 16px;">
+                                    <div>
+                                        <h3 style="font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">Mental Health Self-Assessment</h3>
+                                        <p style="color: var(--text-secondary); font-size: 14px;">Screening Questionnaire</p>
+                                    </div>
+                                </div>
+                                <p style="color: var(--text-secondary); font-size: 14.5px; line-height: 1.6; margin: 0;">
+                                    This comprehensive self-assessment evaluates symptoms across multiple mental health dimensions in a single session. By answering these questions, you will receive a consolidated profile covering:
+                                </p>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 8px 0;">
+                                    <div style="font-size: 13.5px; color: var(--text-primary);">
+                                        <strong>Anxiety</strong>
+                                    </div>
+                                    <div style="font-size: 13.5px; color: var(--text-primary);">
+                                        <strong>Depression</strong>
+                                    </div>
+                                    <div style="font-size: 13.5px; color: var(--text-primary);">
+                                        <strong>Mood Stability</strong>
+                                    </div>
+                                    <div style="font-size: 13.5px; color: var(--text-primary);">
+                                        <strong>Trauma</strong>
+                                    </div>
+                                    <div style="font-size: 13.5px; color: var(--text-primary);">
+                                        <strong>Stress</strong>
+                                    </div>
+                                    <div style="font-size: 13.5px; color: var(--text-primary);">
+                                        <strong>Self-Esteem</strong>
+                                    </div>
+                                </div>
+                                <p style="color: var(--text-muted); font-size: 12.5px; margin: 0; font-style: italic;">
+                            
+                                </p>
+                                <button class="btn-primary" style="padding: 12px 24px; font-size: 15px; font-weight: 700; align-self: flex-start; margin-top: 10px;" onclick="startSelfAssessment('combined')">
+                                    Start Assessment
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="assessmentWizardContainer" style="margin-top: 24px; display: none;">
+                            <!-- Wizard questions inject here -->
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3 style="border-bottom: 1px solid var(--glass-border); padding-bottom: 12px; margin-bottom: 16px;">Assessment History</h3>
+                        <div id="studentAssessmentsList">
+                            <!-- Populated via AJAX -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOOK COUNSELOR TAB -->
+            <div id="appointmentsTab" class="tab-content">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 24px;">Counseling Consultations</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 24px;">
+                    <!-- Booking Form -->
+                    <div class="glass-card">
+                        <div id="urgentBookingBanner"></div>
+                        <h3 style="margin-bottom: 20px;">Request Therapy Session</h3>
+                        <form onsubmit="handleBookAppointment(event)">
+                            <div class="form-group">
+                                <label class="form-label">Choose counselor</label>
+                                <select name="counselor_id" id="bookingCounselor" class="form-control" required onchange="fetchAndRenderCounselorTimeSlots()">
+                                    <!-- Dynamic list of counselors -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Choose session type</label>
+                                <select name="session_type" id="bookingSessionType" class="form-control" required>
+                                    <option value="video">Video Consultation</option>
+                                    <option value="chat">Live Chat Session</option>
+                                    <option value="group" disabled>Group Discussions (Requires Counselor Recommendation)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Requested Date</label>
+                                <input type="date" name="date" id="bookingDate" class="form-control" required min="2026-05-25" onchange="fetchAndRenderCounselorTimeSlots()">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Requested Time Slot (8:00 AM &ndash; 4:00 PM)</span>
+                                    <span style="font-size: 11px; color: var(--text-muted);">1-Hour Sessions</span>
+                                </label>
+                                <input type="hidden" name="time" id="bookingTimeSlot" required>
+                                <div id="timeSlotsContainer" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px;">
+                                    <p style="color: var(--text-secondary); font-size: 13px; grid-column: 1/-1;">Select date and counselor to load time slots.</p>
+                                </div>
+                                <div id="timeSlotWarning" style="display: none; margin-top: 10px; padding: 10px 14px; background: #fee2e2; border: 1px solid #fca5a5; border-radius: 8px; color: #991b1b; font-size: 13px; font-weight: 600;"></div>
+                            </div>
+                            <button type="submit" class="btn-primary" style="width: 100%; margin-top: 12px;">Submit Booking Request</button>
+                        </form>
+                    </div>
+
+                    <!-- Booked Sessions -->
+                    <div>
+                        <h3 style="margin-bottom: 20px; font-weight: 600;">Your Scheduled Appointments</h3>
+                        <div id="studentAppointmentsList">
+                            <!-- Populated via AJAX -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIRECT MESSAGING TAB -->
+            <div id="chatTab" class="tab-content">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 24px;">Counselor Direct Messages</h2>
+                
+                <div class="chat-layout">
+                    <!-- Conversations list -->
+                    <div class="chat-sidebar">
+                        <div class="chat-sidebar-header">Licensed Counselors</div>
+                        <div class="chat-user-list" id="chatUserList">
+                            <!-- Contacts list -->
+                        </div>
+                    </div>
+                    <!-- Conversation window -->
+                    <div class="chat-main">
+                        <div class="chat-main-header">
+                            <span id="chatActivePartnerName" style="font-weight: 700; color: var(--primary);">Select a conversation</span>
+                            <span style="font-size: 12px; color: var(--success); display: flex; align-items: center; gap: 4px;">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--success);"></span> Secure SSL
+                            </span>
+                        </div>
+                        <div class="chat-messages" id="chatMessagesBox">
+                            <!-- Messages logs -->
+                        </div>
+                        <div class="chat-input-area" id="chatSendArea" style="display: none;">
+                            <input type="text" id="chatInputMessage" class="chat-input" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendDirectMessage()">
+                            <button class="btn-chat-send" onclick="sendDirectMessage()">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMMUNITY DISCUSSIONS TAB -->
+            <div id="discussionTab" class="tab-content">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 24px;">Community Discussions</h2>
+                
+                <!-- Community Group Video Discussion Banner -->
+                <div class="glass-card" style="margin-bottom: 24px; padding: 20px; background: linear-gradient(135deg, rgba(13,148,136,0.1), rgba(99,102,241,0.1)); border: 1px solid rgba(13,148,136,0.3); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                            <span style="background: var(--primary); color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; text-transform: uppercase;">Practitioner Moderated</span>
+                            <span style="font-size: 12px; color: var(--text-secondary);" id="groupVideoModStatus">Dedicated Moderator Available</span>
+                        </div>
+                        <h3 style="font-size: 18px; font-weight: 700; margin: 0 0 4px; color: var(--text-primary);">Community Group Video Discussion Room</h3>
+                        <p style="font-size: 13.5px; color: var(--text-muted); margin: 0;">Connect with peers in live group video discussions moderated by a dedicated counselor.</p>
+                    </div>
+                    <button class="btn-primary" onclick="openGroupVideoDiscussionRoom()" style="padding: 10px 24px; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                        <i data-lucide="video" style="width: 18px; height: 18px;"></i>
+                        Join Live Group Video Room
+                    </button>
+                </div>
+
+                <!-- LIVE GROUP CALL INVITE BANNER (appears when counselor calls) -->
+                <div id="discussionCallInviteBanner" style="display:none; margin-bottom: 18px; padding: 16px 20px; background: linear-gradient(135deg, #075e54, #128c7e); border-radius: 14px; border: 2px solid #25d366; display: none; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; animation: pulse-green 1.5s infinite;">
+                    <div style="display:flex; align-items:center; gap:14px;">
+                        <div style="width:48px; height:48px; border-radius:50%; background:#25d366; display:flex; align-items:center; justify-content:center; font-size:22px; animation: ring-shake 0.8s infinite;">📞</div>
+                        <div>
+                            <div style="color:#25d366; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Incoming Group Video Call</div>
+                            <div style="color:#fff; font-size:15px; font-weight:700;" id="discussionCallCounselorName">Counselor</div>
+                            <div style="color:rgba(255,255,255,0.8); font-size:12px;">is inviting you to a live group discussion</div>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <button onclick="acceptIncomingGroupCall(); hideChatInviteBanner();" style="background:#25d366; color:#061e14; border:none; border-radius:24px; padding:10px 22px; font-weight:800; font-size:14px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+                            🟢 Join Now
+                        </button>
+                        <button onclick="declineIncomingGroupCall(); hideChatInviteBanner();" style="background:rgba(239,68,68,0.3); color:#fff; border:1px solid #ef4444; border-radius:24px; padding:10px 18px; font-weight:600; font-size:13px; cursor:pointer;">
+                            Decline
+                        </button>
+                    </div>
+                </div>
+                <style>
+                    @keyframes pulse-green { 0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0.4)} 50%{box-shadow:0 0 0 10px rgba(37,211,102,0)} }
+                    @keyframes ring-shake { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-15deg)} 75%{transform:rotate(15deg)} }
+                </style>
+
+                <div class="glass-card" style="margin-bottom: 16px; padding: 16px;">
+                    <p style="font-size: 14px; color: var(--text-secondary);">This is a safe space for everyone, please be respectful and no hate speech is allowed. Remember: "There's hope, even when your brain tells you there isn't"</p>
+                </div>
+                
+                <div class="chat-layout" style="grid-template-columns: 1fr;">
+                    <div class="chat-main">
+                        <div class="chat-main-header">
+                            <span style="font-weight: 700;">Community Support Board</span>
+                            <span style="font-size: 13px; color: var(--text-muted);">Self-moderated channel</span>
+                        </div>
+                        <div class="chat-messages" id="discussionMessagesBox">
+                            <!-- Chat log -->
+                        </div>
+                        <div class="chat-input-area">
+                            <input type="text" id="discussionInputMessage" class="chat-input" placeholder="Post a supportive message..." onkeypress="if(event.key==='Enter') sendGroupMessage()">
+                            <button class="btn-chat-send" onclick="sendGroupMessage()">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECOVERY STORIES TAB -->
+            <div id="storiesTab" class="tab-content">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 24px;">Mental Health Recovery Stories</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1.8fr; gap: 24px; align-items: start;">
+                    <!-- Post Story Form -->
+                    <div class="glass-card">
+                        <h3 style="margin-bottom: 16px;">Share your story</h3>
+                        <form onsubmit="handleStoryShare(event)">
+                            <div class="form-group">
+                                <label class="form-label">Story Title</label>
+                                <input type="text" name="title" class="form-control" placeholder="Overcoming Exam Stress" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Share details (Describe what helped you, resources used, etc.)</label>
+                                <textarea name="content" class="form-control" rows="8" placeholder="Type your experience here..." required></textarea>
+                            </div>
+                            <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" name="is_anonymous" id="postAnon" value="1">
+                                <label for="postAnon" style="font-size: 13px; color: var(--text-secondary); cursor: pointer; user-select: none;">Post Anonymously (Hide my name)</label>
+                            </div>
+                            <button type="submit" class="btn-primary" style="width: 100%;">Publish Public Story</button>
+                        </form>
+                    </div>
+
+                    <!-- Stories Feed -->
+                    <div>
+                        <h3 style="font-weight: 600;">Inspiring Peers</h3>
+                        <div id="storiesBoard">
+                            <!-- Populated via AJAX -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI CHATBOT TAB (WhatsApp Style) -->
+            <div id="chatbotTab" class="tab-content">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">WellnessBot — Mental Health Assistant</h2>
+                <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 24px;">Ask any mental health question — from symptoms and disorders to coping strategies, therapy types, and crisis support. Type or <strong>speak</strong> your question.</p>
+
+                <!-- WHATSAPP CHAT WRAPPER -->
+                <div class="whatsapp-chat-container" style="
+                    height: 620px;
+                    border-radius: 16px;
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+                    border: 1px solid var(--glass-border);
+                    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+                    background: #efeae2;
+                ">
+                    <!-- WhatsApp Green Header -->
+                    <div style="
+                        background: #075e54;
+                        padding: 12px 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        color: #ffffff;
+                    ">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="position: relative;">
+                                <div style="width: 42px; height: 42px; border-radius: 50%; background: #128c7e; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; font-size: 20px; border: 2px solid #25d366;">
+                                    🤖
+                                </div>
+                                <span style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; border-radius: 50%; background: #25d366; border: 2px solid #075e54;"></span>
+                            </div>
+                            <div>
+                                <span style="font-weight: 700; display: block; font-size: 15px;">WellnessBot</span>
+                                <span style="font-size: 12px; color: #25d366;">online &bull;Mental Health Assistant</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 14px;">
+                            <div id="voiceStatusBadge" style="display: none; align-items: center; gap: 6px; font-size: 12px; color: #ffffff; background: rgba(239,68,68,0.85); border-radius: 20px; padding: 4px 12px;">
+                                <span class="voice-listening-dot"></span> Listening...
+                            </div>
+                            <span style="font-size: 12px; background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 12px;"></span>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Wallpaper Messages Log Box -->
+                    <div class="chat-messages" id="chatbotMessagesBox" style="
+                        flex: 1;
+                        padding: 20px;
+                        overflow-y: auto;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 12px;
+                        background-color: #efeae2;
+                        background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+                        background-size: 16px 16px;
+                    ">
+                        <!-- Welcome message from bot in WhatsApp Incoming Bubble style -->
+                        <div class="chat-bubble-container incoming" style="align-self: flex-start; max-width: 80%;">
+                            <div class="whatsapp-bubble incoming" style="
+                                background: #ffffff;
+                                color: #111b21;
+                                padding: 12px 16px;
+                                border-radius: 12px 12px 12px 2px;
+                                box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+                                font-size: 14.5px;
+                                line-height: 1.5;
+                            ">
+                                <div style="font-weight: 700; font-size: 12px; color: #128c7e; margin-bottom: 4px;">WellnessBot</div>
+                                Welcome to Mental Support! Ask me any mental health question and I will give you a direct, accurate answer. How can I help you today?
+                                <div style="text-align: right; font-size: 10px; color: #667781; margin-top: 4px;">Just now</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Chat Input Area -->
+                    <div style="
+                        background: #f0f2f5;
+                        padding: 12px 16px;
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        border-top: 1px solid rgba(0,0,0,0.08);
+                    ">
+                        <!-- Voice Mic Button -->
+                        <button id="chatbotMicBtn" onclick="toggleChatbotVoice()" title="Speak your question" style="
+                            flex-shrink: 0;
+                            width: 42px; height: 42px;
+                            border-radius: 50%;
+                            border: none;
+                            background: #ffffff;
+                            color: #54656f;
+                            display: flex; align-items: center; justify-content: center;
+                            cursor: pointer;
+                            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                            transition: all 0.2s;
+                        ">
+                            <svg id="chatbotMicIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                <line x1="12" y1="19" x2="12" y2="23"/>
+                                <line x1="8" y1="23" x2="16" y2="23"/>
+                            </svg>
+                        </button>
+
+                        <input type="text" id="chatbotInputMessage" class="chat-input" placeholder="Type a message..." style="
+                            flex: 1;
+                            background: #ffffff;
+                            border: none;
+                            border-radius: 24px;
+                            padding: 12px 18px;
+                            font-size: 14.5px;
+                            color: #111b21;
+                            outline: none;
+                            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                        " onkeypress="if(event.key==='Enter') submitChatbotMessage()">
+
+                        <button class="btn-chat-send" onclick="submitChatbotMessage()" title="Send message" style="
+                            width: 44px; height: 44px;
+                            border-radius: 50%;
+                            background: #00a884;
+                            border: none;
+                            color: white;
+                            cursor: pointer;
+                            display: flex; align-items: center; justify-content: center;
+                            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                            transition: transform 0.2s;
+                        ">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Disclaimer -->
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 12px; text-align: center; line-height: 1.6;">
+                    WellnessBot provides educational information only and is not a substitute for professional mental health support.<br>
+                    For urgent concerns, please <span style="color: var(--primary); cursor: pointer;" onclick="document.querySelector('[data-tab=appointmentsTab]').click()">book a counselor session</span>.
+                </p>
+            </div>
+
+
+            <!-- SETTINGS TAB -->
+            <div id="settingsTab" class="tab-content">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 24px;">Settings</h2>
+                
+                <!-- Profile Picture Section -->
+                <div class="glass-card" style="margin-bottom: 24px;">
+                    <h3 style="margin-bottom: 20px;">Profile Picture</h3>
+                    <div style="display: flex; align-items: center; gap: 24px;">
+                        <div class="avatar-placeholder" id="settingsAvatarPreview" style="width: 80px; height: 80px; font-size: 32px;">S</div>
+                        <div>
+                            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 12px;">Upload a new profile picture</p>
+                            <label class="btn-primary" style="cursor: pointer; padding: 10px 20px; font-size: 13px;">
+                                Choose Image
+                                <input type="file" id="avatarUpload" accept="image/*" style="display: none;" onchange="handleAvatarUpload(event)">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h3 style="margin-bottom: 20px;">Update Profile Information</h3>
+                    <form onsubmit="handleProfileUpdate(event)">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" name="name" id="profileName" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Student ID Number</label>
+                            <input type="text" name="student_id" class="form-control" placeholder="ST-100234">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="text" name="phone" class="form-control" placeholder="+123456789">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Department / Major</label>
+                            <input type="text" name="department" class="form-control" placeholder="Computer Science">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Brief Biography (Will display to assigned counselors)</label>
+                            <textarea name="bio" class="form-control" rows="3" placeholder="Write a short summary..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Save Changes</button>
+                    </form>
+                </div>
+
+                <div class="glass-card" style="margin-top: 24px;">
+                    <h3 style="margin-bottom: 20px;">Change Password</h3>
+                    <form onsubmit="handlePasswordUpdate(event)">
+                        <div class="form-group">
+                            <label class="form-label">Current Password</label>
+                            <input type="password" name="current_password" required placeholder="••••••••" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">New Password</label>
+                            <input type="password" name="new_password" required placeholder="At least 6 characters" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Confirm New Password</label>
+                            <input type="password" name="confirm_new_password" required placeholder="••••••••" class="form-control">
+                        </div>
+                        <button type="submit" class="btn-primary">Update Password</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- DISCUSSION GROUP CHOICE MODAL -->
+    <div class="modal-overlay" id="discussionChoiceModal">
+        <div class="glass-card modal-content" style="max-width: 500px; padding: 32px; text-align: center; border-radius: 20px;">
+            <div style="display: flex; justify-content: flex-end; margin-top: -16px; margin-right: -16px;">
+                <span class="modal-close" onclick="closeModal('discussionChoiceModal')" style="cursor: pointer; font-size: 24px; color: var(--text-muted);">&times;</span>
+            </div>
+            
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(99, 102, 241, 0.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--primary);">
+                <i data-lucide="users" style="width: 32px; height: 32px;"></i>
+            </div>
+            
+            <h2 style="font-size: 22px; font-weight: 800; color: var(--text-primary); margin-bottom: 12px; line-height: 1.3;">Support Group Recommendation</h2>
+            
+            <p style="color: var(--text-secondary); font-size: 14.5px; line-height: 1.6; margin-bottom: 28px;">
+                Your counselor recommends joining a discussion group to stay connected and support your ongoing recovery. To participate, please book a group discussion session.
+            </p>
+            
+            <div style="display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 24px;">
+                <button type="button" class="btn-primary" onclick="closeModal('discussionChoiceModal'); switchTab('appointmentsTab'); document.getElementById('bookingSessionType').value = 'group';" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 15px; width: 100%; cursor: pointer;">
+                    <i data-lucide="calendar-check" style="width: 20px; height: 20px;"></i>
+                    Book Group Session
+                </button>
+            </div>
+            
+            <div style="font-size: 12px; color: var(--text-muted);">
+                You must book a slot to attend the group session.
+            </div>
+        </div>
+    </div>
+
+    <!-- VIDEO CONSULTATION ROOM MODAL — WhatsApp Style -->
+    <div id="videoConsultationModal" style="display:none; position:fixed; inset:0; z-index:9999; flex-direction:column; background:#0d1117;">
+
+        <!-- ── TOP BAR (always visible) ── -->
+        <div id="vcTopBar" style="flex-shrink:0; position:relative; z-index:20; padding:14px 20px; background:linear-gradient(180deg,rgba(0,0,0,0.85) 0%,transparent 100%); display:flex; align-items:center; gap:12px;">
+            <div id="vcAvatar" style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0;">C</div>
+            <div style="min-width:0;">
+                <div id="vcName" style="font-size:16px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Counselor</div>
+                <div id="vcStatus" style="font-size:11px;color:rgba(255,255,255,0.65);">🔒 Connecting…</div>
+            </div>
+            <button onclick="closeVideoConsultationRoom()" style="margin-left:auto;flex-shrink:0;background:rgba(255,255,255,0.1);border:none;border-radius:50%;width:34px;height:34px;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Leave">✕</button>
+        </div>
+
+        <!-- ── VIDEO AREA (Dual Video Tiles — Both Users Visible Side-by-Side) ── -->
+        <div style="flex:1; position:relative; min-height:0; padding:16px; display:flex; gap:16px; overflow:hidden;">
+
+            <!-- Remote Participant Video Tile (Counselor / Student) -->
+            <div style="flex:1; position:relative; background:#161b22; border-radius:16px; overflow:hidden; border:2px solid rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center;">
+                <video id="vcRemoteVideo" autoplay playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+                <div style="position:absolute; bottom:12px; left:12px; background:rgba(0,0,0,0.75); backdrop-filter:blur(6px); padding:6px 14px; border-radius:20px; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; gap:8px; z-index:2;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;"></span>
+                    <span id="vcRemoteTileName" style="color:#fff;font-size:13px;font-weight:700;">Counselor</span>
+                </div>
+            </div>
+
+            <!-- Local Participant Video Tile (Self-View) -->
+            <div style="flex:1; position:relative; background:#161b22; border-radius:16px; overflow:hidden; border:2px solid rgba(13,148,136,0.6); display:flex; align-items:center; justify-content:center;">
+                <video id="vcLocalVideo" autoplay playsinline muted style="width:100%;height:100%;object-fit:cover;display:block;transform:scaleX(-1);"></video>
+                <div style="position:absolute; bottom:12px; left:12px; background:rgba(0,0,0,0.75); backdrop-filter:blur(6px); padding:6px 14px; border-radius:20px; border:1px solid rgba(13,148,136,0.4); display:flex; align-items:center; gap:8px; z-index:2;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:#0d9488;display:inline-block;"></span>
+                    <span id="vcLocalTileName" style="color:#fff;font-size:13px;font-weight:700;">You (Self-View)</span>
+                </div>
+            </div>
+
+            <!-- Connecting splash — auto-dismissed by JS after connect -->
+            <div id="vcCallingSplash" style="position:absolute;inset:0;z-index:5;background:linear-gradient(160deg,#0f2027,#203a43,#2c5364);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease;">
+                <div style="position:relative;width:140px;height:140px;display:flex;align-items:center;justify-content:center;margin-bottom:28px;">
+                    <div style="position:absolute;width:140px;height:140px;border-radius:50%;background:rgba(37,211,102,0.12);animation:pulseRipple 2s ease-out infinite;"></div>
+                    <div style="position:absolute;width:112px;height:112px;border-radius:50%;background:rgba(37,211,102,0.18);animation:pulseRipple 2s ease-out infinite 0.6s;"></div>
+                    <div style="position:absolute;width:86px;height:86px;border-radius:50%;background:rgba(37,211,102,0.24);animation:pulseRipple 2s ease-out infinite 1.2s;"></div>
+                    <div id="vcSplashAvatar" style="width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;color:#fff;position:relative;z-index:2;box-shadow:0 6px 24px rgba(0,0,0,0.5);">C</div>
+                </div>
+                <div id="vcSplashName" style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;">Counselor</div>
+                <div id="vcCallingText" style="font-size:13px;color:rgba(255,255,255,0.55);">Connecting, please allow camera &amp; microphone…</div>
+            </div>
+        </div>
+
+        <!-- ── BOTTOM CONTROLS (always visible) ── -->
+        <div style="flex-shrink:0;position:relative;z-index:20;padding:18px 24px 24px;background:linear-gradient(0deg,rgba(0,0,0,0.9) 0%,transparent 100%);display:flex;align-items:center;justify-content:center;gap:32px;">
+            <!-- Mute -->
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+                <button id="vcMuteBtn" onclick="vcToggleMute()" title="Mute" style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;">
+                    <i id="vcMuteIcon" data-lucide="mic" style="width:22px;height:22px;"></i>
+                </button>
+                <span style="font-size:10px;color:rgba(255,255,255,0.5);">Mute</span>
+            </div>
+            <!-- End Call -->
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+                <button onclick="closeVideoConsultationRoom()" title="End Call" style="width:68px;height:68px;border-radius:50%;background:#e53935;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(229,57,53,0.55);transition:all 0.2s;">
+                    <i data-lucide="phone-off" style="width:24px;height:24px;"></i>
+                </button>
+                <span style="font-size:10px;color:rgba(255,255,255,0.5);">End Call</span>
+            </div>
+            <!-- Camera -->
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+                <button id="vcCamBtn" onclick="vcToggleCam()" title="Camera" style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;">
+                    <i id="vcCamIcon" data-lucide="video" style="width:22px;height:22px;"></i>
+                </button>
+                <span style="font-size:10px;color:rgba(255,255,255,0.5);">Camera</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── COMMUNITY GROUP VIDEO DISCUSSION MODAL ── -->
+    <div id="groupVideoDiscussionModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:#060d15;flex-direction:column;font-family:var(--font-sans,sans-serif);">
+        <!-- Top Header -->
+        <div style="flex-shrink:0;padding:16px 28px;background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:space-between;gap:20px;">
+            <div style="display:flex;align-items:center;gap:14px;">
+                <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:700;">
+                    <i data-lucide="users" style="width:22px;height:22px;"></i>
+                </div>
+                <div>
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <h2 style="font-size:18px;font-weight:700;color:#fff;margin:0;">Community Group Video Discussion</h2>
+                        <span style="background:rgba(16,185,129,0.2);color:#10b981;border:1px solid rgba(16,185,129,0.4);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px;">LIVE</span>
+                    </div>
+                    <div id="gvTopicText" style="font-size:12.5px;color:rgba(255,255,255,0.6);margin-top:2px;">Topic: General Mental Health Support &amp; Discussion</div>
+                </div>
+            </div>
+
+            <!-- Moderator Info Badge & Exit -->
+            <div style="display:flex;align-items:center;gap:16px;">
+                <div id="gvModeratorCard" style="display:flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid rgba(13,148,136,0.4);padding:6px 14px;border-radius:20px;">
+                    <i data-lucide="shield-check" style="width:16px;height:16px;color:#2dd4bf;"></i>
+                    <span style="font-size:12px;color:#fff;font-weight:600;" id="gvModeratorName">Counselor: Waiting...</span>
+                </div>
+                <button onclick="leaveGroupVideoRoom()" style="background:rgba(239,68,68,0.2);color:#ef4444;border:1px solid rgba(239,68,68,0.4);padding:8px 18px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;transition:all 0.2s;">
+                    Leave Discussion
+                </button>
+            </div>
+        </div>
+
+        <!-- Practitioner Moderator Action Bar (Visible to Counselors / Admins) -->
+        <div id="gvModeratorBar" style="display:none;flex-shrink:0;padding:10px 28px;background:rgba(13,148,136,0.15);border-bottom:1px solid rgba(13,148,136,0.3);align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:10px;color:#fff;font-size:13px;font-weight:600;">
+                <i data-lucide="shield-alert" style="width:18px;height:18px;color:#2dd4bf;"></i>
+                <span>Counselor Moderation Controls:</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                <input type="text" id="gvNewTopicInput" placeholder="Set discussion topic..." style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:6px 12px;border-radius:6px;font-size:12px;width:240px;">
+                <button onclick="gvUpdateTopic()" style="background:var(--primary);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;">Update Topic</button>
+                <button onclick="gvMuteAllStudents()" style="background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.4);padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;">Mute All Students</button>
+                <button onclick="gvEndDiscussionForEveryone()" style="background:rgba(239,68,68,0.25);color:#f87171;border:1px solid rgba(239,68,68,0.5);padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;">End Discussion for All</button>
+            </div>
+        </div>
+
+        <!-- Main Body: Video Grid (Left) + Participant Sidebar (Right) -->
+        <div style="flex:1;display:flex;overflow:hidden;">
+            <!-- Video Tiles Area -->
+            <div style="flex:1;padding:20px;overflow-y:auto;display:flex;flex-direction:column;gap:16px;">
+
+                <!-- MY VIDEO TILE (Self-View) -->
+                <div id="gvMyVideoTile" style="background:rgba(0,0,0,0.5);border:2px solid rgba(37,211,102,0.6);border-radius:16px;overflow:hidden;position:relative;aspect-ratio:16/9;max-height:200px;">
+                    <video id="gvLocalVideo" autoplay muted playsinline style="width:100%;height:100%;object-fit:cover;background:#000;"></video>
+                    <div style="position:absolute;bottom:10px;left:12px;display:flex;align-items:center;gap:8px;">
+                        <div style="background:rgba(0,0,0,0.6);border-radius:8px;padding:4px 10px;display:flex;align-items:center;gap:6px;">
+                            <span style="width:8px;height:8px;border-radius:50%;background:#25d366;display:inline-block;"></span>
+                            <span style="color:#fff;font-size:12px;font-weight:700;" id="gvMyVideoName">You</span>
+                        </div>
+                    </div>
+                    <div id="gvMyVideoCamOff" style="display:none;position:absolute;inset:0;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+                        <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#0d9488,#6366f1);display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;font-weight:700;" id="gvMyVideoAvatar">Y</div>
+                        <span style="color:rgba(255,255,255,0.6);font-size:12px;">Camera Off</span>
+                    </div>
+                </div>
+
+                <!-- Practitioner Spotlight Tile -->
+                <div id="gvPractitionerSpotlight" style="background:rgba(255,255,255,0.03);border:1px solid rgba(13,148,136,0.3);border-radius:16px;overflow:hidden;position:relative;">
+                    <div style="background:#000;aspect-ratio:16/9;max-height:180px;position:relative;">
+                        <video id="gvSpotlightVideo" autoplay playsinline style="width:100%;height:100%;object-fit:cover;display:none;"></video>
+                        <div id="gvSpotlightAvatar" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(13,148,136,0.4),rgba(99,102,241,0.4));"><span style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#0d9488,#6366f1);display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;font-weight:700;" id="gvSpotlightAvatarText">P</span></div>
+                    </div>
+                    <div style="padding:12px 16px;display:flex;align-items:center;gap:8px;">
+                        <span style="color:#fff;font-weight:700;font-size:15px;" id="gvSpotlightName">Counselor Moderator</span>
+                        <span style="background:#0d9488;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">COUNSELOR</span>
+                        <span style="font-size:11px;color:rgba(255,255,255,0.5);margin-left:auto;">Moderator</span>
+                    </div>
+                </div>
+
+                <!-- Video Grid for Group Members -->
+                <div id="gvVideoGrid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;">
+                    <!-- Dynamically populated video cards for participants -->
+                </div>
+            </div>
+
+            <!-- Right Sidebar: Members & Rules -->
+            <div style="width:280px;background:rgba(255,255,255,0.02);border-left:1px solid rgba(255,255,255,0.1);padding:20px;display:flex;flex-direction:column;gap:20px;overflow-y:auto;">
+                <div>
+                    <h3 style="font-size:14px;font-weight:700;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+                        <i data-lucide="users" style="width:16px;height:16px;color:var(--primary);"></i>
+                        Group Members (<span id="gvMemberCount">0</span>)
+                    </h3>
+                    <div id="gvMemberList" style="display:flex;flex-direction:column;gap:8px;">
+                        <!-- Dynamically populated members list -->
+                    </div>
+                </div>
+
+                <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;">
+                    <h4 style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.7);margin-bottom:8px;">Discussion Guidelines</h4>
+                    <ul style="font-size:11.5px;color:rgba(255,255,255,0.5);margin-left:16px;line-height:1.6;">
+                        <li>Respect all participants and their experiences.</li>
+                        <li>Maintain strict privacy &amp; confidentiality.</li>
+                        <li>Raise hand or wait for practitioner guidance.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Controls -->
+        <div style="flex-shrink:0;padding:16px;background:rgba(0,0,0,0.6);border-top:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;gap:24px;">
+            <button id="gvMuteBtn" onclick="gvToggleMute()" style="width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" title="Toggle Microphone">
+                <i id="gvMuteIcon" data-lucide="mic" style="width:20px;height:20px;"></i>
+            </button>
+            <button id="gvCamBtn" onclick="gvToggleCam()" style="width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" title="Toggle Camera">
+                <i id="gvCamIcon" data-lucide="video" style="width:20px;height:20px;"></i>
+            </button>
+            <button onclick="leaveGroupVideoRoom()" style="background:#e53935;color:#fff;border:none;padding:10px 24px;border-radius:24px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 4px 14px rgba(229,57,53,0.4);" title="Leave Room">
+                Leave Room
+            </button>
+        </div>
+    </div>
+
+    <!-- Site Footer -->
+    <footer style="
+        background: var(--glass-bg);
+        border-top: 1px solid var(--glass-border);
+        padding: 14px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: var(--text-muted);
+    ">
+        <a href="docs/user_manual.html" style="
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 7px 18px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        " onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            User Manual
+        </a>
+    </footer>
+
+    <!-- WHATSAPP-STYLE INCOMING GROUP CALL POPUP MODAL -->
+    <div id="incomingGroupCallModal" style="display:none; position:fixed; top:24px; right:24px; z-index:99999; background: #075e54; border-radius: 16px; padding: 20px 24px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); border: 2px solid #25d366; color: #fff; max-width: 380px;">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
+            <div style="width: 50px; height: 50px; border-radius: 50%; background: #128c7e; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; border: 2px solid #25d366;">
+                📞
+            </div>
+            <div>
+                <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #25d366; font-weight: 700;">Community Group Call Invite</div>
+                <div id="incomingCallCounselorName" style="font-size: 16px; font-weight: 700;">Counselor Moderator</div>
+                <div style="font-size: 12px; color: rgba(255,255,255,0.85);">Inviting you to Group Video Call</div>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 16px;">
+            <button onclick="acceptIncomingGroupCall()" style="flex:1; background: #25d366; color: #061e14; border: none; border-radius: 24px; padding: 10px; font-weight: 800; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                <span>🟢 Join Call</span>
+            </button>
+            <button onclick="declineIncomingGroupCall()" style="background: rgba(239,68,68,0.3); color: #fff; border: 1px solid #ef4444; border-radius: 24px; padding: 10px 16px; font-weight: 600; font-size: 13px; cursor: pointer;">
+                Decline
+            </button>
+        </div>
+    </div>
+
+    <script src="js/app.js?v=50"></script>
+    <script>
+        // Init Dashboard logic for Student role on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initDashboard('student');
+        });
+    </script>
+</body>
+</html>

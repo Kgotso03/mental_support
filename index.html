@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Mental Health Support Platform For Tertiary Students</title>
+    <link rel="stylesheet" href="css/styles.css?v=9">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo" style="cursor: pointer;" onclick="window.location.href='index.html'">
+            Mental Support
+        </div>
+        <div class="nav-links">
+            <button class="nav-item" onclick="openModal('aboutModal')" style="background: none; border: none; font-size: 16px; font-family: inherit; font-weight: 500;">About</button>
+            <button class="btn-primary" onclick="openModal('registerModal')">Sign Up</button>
+        </div>
+    </header>
+
+    <!-- Login Page Content -->
+    <section class="landing-hero" style="grid-template-columns: 1fr; max-width: 440px; margin: 60px auto;">
+        <div class="glass-card" style="padding: 40px; border-radius: var(--border-radius-md); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05); text-align: center;">
+            <div style="margin-bottom: 24px; text-align: center;">
+                <h2 style="font-size: 28px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Login Portal</h2>
+                <p style="font-size: 14px; color: var(--text-muted);">Enter your credentials to access your dashboard</p>
+            </div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" name="email" class="form-control" placeholder="enter your student/counselor email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px; padding: 14px 24px;">Log In</button>
+            </form>
+            <p style="font-size: 13.5px; color: var(--text-secondary); text-align: center; margin-top: 24px;">
+                Don't have an account? <a href="#" onclick="openModal('registerModal');" style="font-weight: 600;">Create one here</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ABOUT MODAL -->
+    <div class="modal-overlay" id="aboutModal">
+        <div class="glass-card modal-content" style="max-width: 1000px; max-height: 90vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h2 style="font-weight: 700; color: var(--text-primary);">About Our Platform</h2>
+                <span class="modal-close" onclick="closeModal('aboutModal')">&times;</span>
+            </div>
+            
+            <div class="about-modal-grid" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; text-align: left;">
+                <div>
+                    <h1 style="font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 16px; color: var(--text-primary);">Digital Mental Health Support Platform</h1>
+                    <p style="font-size: 15px; color: var(--text-secondary); margin-bottom: 28px; line-height: 1.6;">A secure, confidential space for tertiary level students to complete mental health self-assessments, share recovery stories, and connect with licensed counselors through chat and video sessions.</p>
+                    
+                    <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px; color: var(--text-primary);">Core Platform Features</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="feature-box" style="background: rgba(0, 0, 0, 0.01);">
+                            <h3 style="font-size: 15px; font-weight: 600; color: var(--primary);">Self-Assessments</h3>
+                            <p style="font-size: 12.5px; color: var(--text-secondary);">Screen for anxiety, depression, bipolar disorder, PTSD, and stress with validated questionnaires.</p>
+                        </div>
+                        <div class="feature-box" style="background: rgba(0, 0, 0, 0.01);">
+                            <h3 style="font-size: 15px; font-weight: 600; color: var(--primary);">Direct Chat</h3>
+                            <p style="font-size: 12.5px; color: var(--text-secondary);">Message experienced counselors securely in real-time without page reloads.</p>
+                        </div>
+                        <div class="feature-box" style="background: rgba(0, 0, 0, 0.01);">
+                            <h3 style="font-size: 15px; font-weight: 600; color: var(--primary);">Story Sharing</h3>
+                            <p style="font-size: 12.5px; color: var(--text-secondary);">Share your own mental health recovery journey publicly or anonymously.</p>
+                        </div>
+                        <div class="feature-box" style="background: rgba(0, 0, 0, 0.01);">
+                            <h3 style="font-size: 15px; font-weight: 600; color: var(--primary);">Video Consultations</h3>
+                            <p style="font-size: 12.5px; color: var(--text-secondary);">Secure WebRTC video rooms prepped for online session consultations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <!-- Benefits of Seeking Support -->
+                    <div class="glass-card" style="padding: 24px; border-radius: var(--border-radius-md); background: rgba(0,0,0,0.01); box-shadow: none;">
+                        <h3 style="font-size: 16px; font-weight: 700; color: #000000; margin-bottom: 12px;">Benefits of Seeking Support</h3>
+                        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                            <li style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">
+                                - Improved academic performance through better focus, concentration, and reduced stress levels.
+                            </li>
+                            <li style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">
+                                - Stronger coping skills and emotional resilience to handle life's challenges confidently.
+                            </li>
+                            <li style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">
+                                - Healthier relationships and improved communication with peers and family.
+                            </li>
+                            <li style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">
+                                - Early detection and management of anxiety, depression, and other mental health conditions.
+                            </li>
+                            <li style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">
+                                - Greater self-awareness, personal growth, and a more positive outlook on life.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Risks of Not Seeking Support -->
+                    <div class="glass-card" style="padding: 24px; border-radius: var(--border-radius-md); background: rgba(0,0,0,0.01); box-shadow: none;">
+                        <h3 style="font-size: 16px; font-weight: 700; color: #000000; margin-bottom: 12px;">Risks of Not Seeking Support</h3>
+                        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                            <li style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">
+                                - Worsening symptoms of anxiety, depression, and burnout that become harder to treat over time.
+                            </li>
+                            <li style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">
+                                - Declining academic performance, missed deadlines, and risk of academic suspension or dropout.
+                            </li>
+                            <li style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">
+                                - Social isolation, strained relationships, and difficulty trusting others.
+                            </li>
+                            <li style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">
+                                - Increased risk of substance abuse as an unhealthy coping mechanism.
+                            </li>
+                            <li style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">
+                                - Long-term emotional damage and reduced quality of life that impacts career and future goals.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGISTRATION MODAL -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="glass-card modal-content" style="max-height: 90vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h2 style="font-weight: 700; color: var(--primary);">Create Student Account</h2>
+                <span class="modal-close" onclick="closeModal('registerModal')">&times;</span>
+            </div>
+            <form onsubmit="handleRegister(event)">
+                <input type="hidden" name="role" value="student">
+
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="name" class="form-control" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" name="email" class="form-control" placeholder="email@university.edu" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="at least 6 characters" required>
+                </div>
+
+                <!-- Student specific fields -->
+                <div id="studentFields">
+                    <div class="form-group">
+                        <label class="form-label">University / College</label>
+                        <input type="text" name="university" class="form-control" placeholder="e.g. University of Swaziland" id="studentUniversityInput" list="universitiesDatalist" required autocomplete="off">
+                        <datalist id="universitiesDatalist"></datalist>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Student ID Card Number</label>
+                        <input type="text" name="student_id" class="form-control" placeholder="STD-202380196">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="text" name="phone" class="form-control" placeholder="+26878123456">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Department / Major</label>
+                        <input type="text" name="department" class="form-control" placeholder="Computer Science">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Bio (Brief context for counselor)</label>
+                        <textarea name="student_bio" class="form-control" rows="3" placeholder="A little about yourself..."></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Register Account</button>
+            </form>
+            <p style="font-size: 13px; color: var(--text-secondary); text-align: center; margin-top: 16px;">
+                Already have an account? <a href="#" onclick="closeModal('registerModal'); openModal('loginModal');">Log in here</a>
+            </p>
+        </div>
+    </div>
+    <script>
+        // Session guard: if already logged in (and no error present), redirect to correct dashboard
+        (function() {
+            try {
+                if (window.location.search.indexOf('error') !== -1) {
+                    localStorage.removeItem('mhp_user');
+                    sessionStorage.clear();
+                    return;
+                }
+                var saved = localStorage.getItem('mhp_user');
+                if (saved) {
+                    var user = JSON.parse(saved);
+                    if (user && user.role) {
+                        var dashMap = {
+                            'admin':     'dashboard_admin.html',
+                            'student':   'dashboard_student.html',
+                            'counselor': 'dashboard_counselor.html',
+                            'lecturer':  'dashboard_lecturer.html'
+                        };
+                        var dest = dashMap[user.role];
+                        if (dest) {
+                            window.location.replace(dest);
+                        }
+                    }
+                }
+            } catch(e) {}
+        })();
+    </script>
+    <script src="js/app.js?v=46"></script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Dashboard - Mental Support</title>
+    <link rel="stylesheet" href="css/styles.css?v=11">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+        Admin
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; position: relative;">
+            <button class="btn-secondary" onclick="goBackStep()">&larr; Back</button>
+            <button class="btn-secondary" onclick="handleLogout()">Log Out</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <div class="glass-card sidebar">
+            <div class="sidebar-profile">
+                <div class="avatar-placeholder" id="avatarLetter">A</div>
+                <h3 id="userGreeting" style="font-weight: 700;">Admin User</h3>
+                <span style="font-size: 12px; color: var(--primary);">Platform Moderator</span>
+                <span id="userUniversity" style="font-size: 11px; color: var(--text-secondary); display: block; margin-top: 4px;"></span>
+                <div style="margin-top: 12px;">
+                    <label class="btn-secondary" style="cursor: pointer; padding: 6px 12px; font-size: 12px;">
+                        Upload Profile Picture
+                        <input type="file" id="avatarUpload" accept="image/*" style="display: none;" onchange="handleAvatarUpload(event)">
+                    </label>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <div class="sidebar-link active" data-tab="adminOverviewTab">Activity Overview</div>
+                <div class="sidebar-link" data-tab="adminUsersTab">User Management</div>
+                <div class="sidebar-link" data-tab="adminUniversitiesTab">Universities</div>
+            </div>
+        </div>
+
+        <!-- Contents View -->
+        <div class="dashboard-content">
+            
+            <!-- ADMIN OVERVIEW TAB (DEFAULT) -->
+            <div id="adminOverviewTab" class="tab-content active">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 24px;">Platform Performance &amp; Analytics</h2>
+
+                <!-- Quick stats grid — all 6 cards clickable -->
+                <div class="stats-grid">
+                    <div class="glass-card stat-card" onclick="switchTab('adminUsersTab'); loadUsersList('student');" title="Click to view students" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 32px rgba(13,148,136,0.18)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                        <div class="stat-value" id="statStudents">0</div>
+                        <div class="stat-label">Total Students</div>
+                    </div>
+                    <div class="glass-card stat-card" onclick="switchTab('adminUsersTab'); loadUsersList('counselor');" title="Click to view counselors" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 32px rgba(13,148,136,0.18)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                        <div class="stat-value" id="statCounselors">0</div>
+                        <div class="stat-label">Total Counselors</div>
+                    </div>
+                    <div class="glass-card stat-card" onclick="switchTab('adminUsersTab'); loadUsersList('lecturer');" title="Click to view lecturers" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 32px rgba(13,148,136,0.18)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                        <div class="stat-value" id="statLecturers">0</div>
+                        <div class="stat-label">Total Lecturers</div>
+                    </div>
+                    <div class="glass-card stat-card" onclick="openAdminSessionsModal();" title="Click to view therapy sessions" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 32px rgba(13,148,136,0.18)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                        <div class="stat-value" id="statAppointments">0</div>
+                        <div class="stat-label">Therapy Sessions</div>
+                    </div>
+                    <div class="glass-card stat-card" onclick="openAdminStoriesModal();" title="Click to view shared stories" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 32px rgba(13,148,136,0.18)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                        <div class="stat-value" id="statStories">0</div>
+                        <div class="stat-label">Shared Stories</div>
+                    </div>
+                    <div class="glass-card stat-card" onclick="openAdminAssessmentsModal();" title="Click to view assessment logs" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 32px rgba(13,148,136,0.18)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                        <div class="stat-value" id="statAssessments">0</div>
+                        <div class="stat-label">Assessments Taken</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- USER MANAGEMENT TAB -->
+            <div id="adminUsersTab" class="tab-content">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 24px;">User Registry & Moderation</h2>
+                
+                <!-- Toggle between Students / Counselors & Add Counselor Button -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 16px;">
+                    <div style="display: flex; gap: 16px;">
+                        <button class="btn-secondary admin-sub-tab active" id="btnShowStudents" onclick="loadUsersList('student')">Student Accounts</button>
+                        <button class="btn-secondary admin-sub-tab" id="btnShowCounselors" onclick="loadUsersList('counselor')">Counselor Profiles</button>
+                        <button class="btn-secondary admin-sub-tab" id="btnShowLecturers" onclick="loadUsersList('lecturer')">Lecturer Profiles</button>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn-primary" onclick="openModal('addCounselorModal')">+ Add Counselor</button>
+                        <button class="btn-primary" onclick="openModal('addLecturerModal')">+ Add Lecturer</button>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <div id="adminUsersList">
+                        <!-- Populated via AJAX -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIVERSITY MANAGEMENT TAB -->
+            <div id="adminUniversitiesTab" class="tab-content">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 24px;">University Registry</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <button class="btn-primary" onclick="openModal('addUniversityModal')">+ Add University</button>
+                </div>
+                <div class="glass-card" style="padding: 16px;">
+                    <div id="universitiesList">
+                        <!-- Populated via AJAX -->
+                    </div>
+                </div>
+            <!-- CONTENT MODERATION TAB -->
+            <div id="adminModerateTab" class="tab-content">
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 24px;">Community Content Moderation</h2>
+                <div style="margin-bottom: 20px; display: flex; gap: 12px;">
+                    <button class="btn-primary" onclick="openAdminStoriesModal()">📖 View &amp; Moderate Shared Stories</button>
+                </div>
+                <div class="glass-card" style="padding: 20px;">
+                    <h3 style="font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 12px;">Community Discussion Posts</h3>
+                    <div id="adminDiscussionsList">
+                        <!-- Populated via AJAX -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/app.js?v=47"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            initDashboard('admin');
+
+            // Ensure all stat cards are clickable by attaching listeners programmatically
+            const cardActions = [
+                { id: 'statStudents',     fn: () => { switchTab('adminUsersTab'); loadUsersList('student'); } },
+                { id: 'statCounselors',   fn: () => { switchTab('adminUsersTab'); loadUsersList('counselor'); } },
+                { id: 'statLecturers',    fn: () => { switchTab('adminUsersTab'); loadUsersList('lecturer'); } },
+                { id: 'statAppointments', fn: () => openAdminSessionsModal() },
+                { id: 'statStories',      fn: () => openAdminStoriesModal() },
+                { id: 'statAssessments',  fn: () => openAdminAssessmentsModal() },
+            ];
+            cardActions.forEach(({ id, fn }) => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const card = el.closest('.stat-card');
+                    if (card) {
+                        card.style.cursor = 'pointer';
+                        card.addEventListener('click', fn);
+                    }
+                }
+            });
+        });
+    </script>
+<!-- Delete User Modal -->
+<div class="modal-overlay" id="deleteUserModal">
+    <div class="glass-card modal-content" style="max-width:440px; padding:32px; border-radius:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h3 style="font-size:20px; font-weight:700; color:var(--danger);">⚠️ Remove User Account</h3>
+            <span class="modal-close" onclick="closeModal('deleteUserModal')">&times;</span>
+        </div>
+        <p style="font-size:14px; color:var(--text-secondary); margin-bottom:20px;">This action is permanent and cannot be undone. Enter the admin password and provide a reason to proceed.</p>
+        <form id="deleteUserForm" onsubmit="handleDeleteUser(event)">
+            <input type="hidden" id="deleteTargetUserId" name="user_id" />
+            <input type="hidden" id="deleteTargetRole" name="role" />
+            <div style="margin-bottom:14px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Admin Password</label>
+                <input type="password" id="adminPasswordInput" name="admin_password" required placeholder="Enter admin password" class="form-control" />
+            </div>
+            <div style="margin-bottom:20px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Reason for Removal</label>
+                <textarea id="deleteReasonInput" name="reason" required placeholder="Describe the reason for removing this account..." class="form-control" rows="3" style="resize:vertical;"></textarea>
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn-secondary" onclick="closeModal('deleteUserModal')">Cancel</button>
+                <button type="submit" class="btn-primary" style="background:linear-gradient(135deg,#ef4444,#b91c1c); border:none;">Delete User</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Add Counselor Modal -->
+<div class="modal-overlay" id="addCounselorModal">
+    <div class="glass-card modal-content" style="max-width:480px; padding:32px; border-radius:20px; max-height:90vh; overflow-y:auto;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h3 style="font-size:20px; font-weight:700; color:var(--primary);">➕ Add Counselor Profile</h3>
+            <span class="modal-close" onclick="closeModal('addCounselorModal')">&times;</span>
+        </div>
+        <form id="addCounselorForm" onsubmit="handleAddCounselor(event)">
+            <div style="margin-bottom:14px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Full Name</label>
+                <input type="text" id="counselorNameInput" required placeholder="Dr. Jane Smith" class="form-control" />
+            </div>
+            <div style="margin-bottom:14px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Email Address</label>
+                <input type="email" id="counselorEmailInput" required placeholder="janesmith@university.edu" class="form-control" />
+            </div>
+            <div style="margin-bottom:14px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Temporary Password</label>
+                <input type="password" id="counselorPasswordInput" required placeholder="At least 6 characters" class="form-control" />
+            </div>
+            <div style="margin-bottom:14px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Specialty Areas</label>
+                <input type="text" id="counselorSpecialtyInput" required placeholder="CBT, Anxiety, Bipolar Support" class="form-control" />
+            </div>
+            <div style="margin-bottom:20px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Professional Biography</label>
+                <textarea id="counselorBioInput" placeholder="Brief professional background details..." class="form-control" rows="3" style="resize:vertical;"></textarea>
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn-secondary" onclick="closeModal('addCounselorModal')">Cancel</button>
+                <button type="submit" class="btn-primary">Add Counselor</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Add Lecturer Modal -->
+<div class="modal-overlay" id="addLecturerModal">
+    <div class="glass-card modal-content" style="max-width:480px; padding:32px; border-radius:20px; max-height:90vh; overflow-y:auto;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h3 style="font-size:20px; font-weight:700; color:var(--primary);">➕ Add Lecturer Profile</h3>
+            <span class="modal-close" onclick="closeModal('addLecturerModal')">&times;</span>
+        </div>
+        <form id="addLecturerForm" onsubmit="handleAddLecturer(event)">
+            <div style="margin-bottom:14px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Full Name</label>
+                <input type="text" id="lecturerNameInput" required placeholder="Dr. John Doe" class="form-control" />
+            </div>
+            <div style="margin-bottom:14px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Email Address</label>
+                <input type="email" id="lecturerEmailInput" required placeholder="johndoe@university.edu" class="form-control" />
+            </div>
+            <div style="margin-bottom:14px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Temporary Password</label>
+                <input type="password" id="lecturerPasswordInput" required placeholder="At least 6 characters" class="form-control" />
+            </div>
+            <div style="margin-bottom:20px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Department</label>
+                <input type="text" id="lecturerDepartmentInput" required placeholder="Computer Science, Psychology, etc." class="form-control" />
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn-secondary" onclick="closeModal('addLecturerModal')">Cancel</button>
+                <button type="submit" class="btn-primary">Add Lecturer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Change Password Modal -->
+<div class="modal-overlay" id="changePasswordModal">
+    <div class="glass-card modal-content" style="max-width:440px; padding:32px; border-radius:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h3 style="font-size:20px; font-weight:700; color:var(--primary);">🔑 Change User Password</h3>
+            <span class="modal-close" onclick="closeModal('changePasswordModal')" style="cursor:pointer; font-size:24px; color:var(--text-muted);">&times;</span>
+        </div>
+        <p style="font-size:14px; color:var(--text-secondary); margin-bottom:20px;">Set a new password for this user. You must confirm your admin password to proceed.</p>
+        <form id="changePasswordForm" onsubmit="handleUpdatePassword(event)">
+            <input type="hidden" id="cpTargetUserId" />
+            <input type="hidden" id="cpTargetRole" />
+            <div style="margin-bottom:14px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">New Password</label>
+                <input type="password" id="cpNewPassword" required placeholder="At least 6 characters" class="form-control" />
+            </div>
+            <div style="margin-bottom:14px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Confirm New Password</label>
+                <input type="password" id="cpConfirmPassword" required placeholder="Re-enter new password" class="form-control" />
+            </div>
+            <div style="margin-bottom:20px;">
+                <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">Admin Password</label>
+                <input type="password" id="cpAdminPassword" required placeholder="Enter your admin password" class="form-control" />
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn-secondary" onclick="closeModal('changePasswordModal')">Cancel</button>
+                <button type="submit" id="cpSubmitBtn" class="btn-primary">Update Password</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="userDetailsModal">
+    <div class="glass-card modal-content" style="max-width:500px; padding:32px; border-radius:20px; max-height:90vh; overflow-y:auto;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h3 style="font-size:20px; font-weight:700; color:var(--primary);">User Details</h3>
+            <span class="modal-close" onclick="closeModal('userDetailsModal')" style="cursor:pointer; font-size:24px; color:var(--text-muted);">&times;</span>
+        </div>
+        <div id="userDetailsContent">
+            <!-- Populated via JS -->
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+            <button class="btn-secondary" onclick="closeModal('userDetailsModal')">Close</button>
+        </div>
+    </div>
+</div>
+
+    <!-- Add University Modal -->
+    <div class="modal-overlay" id="addUniversityModal">
+        <div class="glass-card modal-content" style="max-width:400px; padding:32px; border-radius:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h3 style="font-size:20px; font-weight:700; color:var(--primary);">➕ Add University</h3>
+                <span class="modal-close" onclick="closeModal('addUniversityModal')">&times;</span>
+            </div>
+            <form id="addUniversityForm" onsubmit="handleAddUniversity(event)">
+                <div style="margin-bottom:14px;">
+                    <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px; color:var(--text-primary);">University Name</label>
+                    <input type="text" id="universityNameInput" required placeholder="University of Example" class="form-control" />
+                </div>
+                <div style="display:flex; justify-content:flex-end; gap:10px;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('addUniversityModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Add University</button>
+                </div>
+            </form>
+    <!-- Admin Therapy Sessions Modal -->
+    <div class="modal-overlay" id="adminSessionsModal">
+        <div class="glass-card modal-content" style="max-width:740px; padding:32px; border-radius:20px; max-height:90vh; overflow-y:auto;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h3 style="font-size:20px; font-weight:700; color:var(--primary);">🗓️ Therapy Sessions Audit</h3>
+                <span class="modal-close" onclick="closeModal('adminSessionsModal')" style="cursor:pointer; font-size:24px; color:var(--text-muted);">&times;</span>
+            </div>
+            <div id="adminSessionsListContent">
+                <!-- Populated via JS -->
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                <button class="btn-secondary" onclick="closeModal('adminSessionsModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Shared Stories Modal -->
+    <div class="modal-overlay" id="adminStoriesModal">
+        <div class="glass-card modal-content" style="max-width:700px; padding:32px; border-radius:20px; max-height:90vh; overflow-y:auto;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h3 style="font-size:20px; font-weight:700; color:var(--primary);">📖 Shared Recovery Stories Audit</h3>
+                <span class="modal-close" onclick="closeModal('adminStoriesModal')" style="cursor:pointer; font-size:24px; color:var(--text-muted);">&times;</span>
+            </div>
+            <div id="adminStoriesListContent">
+                <!-- Populated via JS -->
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                <button class="btn-secondary" onclick="closeModal('adminStoriesModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Assessments Taken Modal -->
+    <div class="modal-overlay" id="adminAssessmentsModal">
+        <div class="glass-card modal-content" style="max-width:740px; padding:32px; border-radius:20px; max-height:90vh; overflow-y:auto;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h3 style="font-size:20px; font-weight:700; color:var(--primary);">📊 Self-Assessments Log Audit</h3>
+                <span class="modal-close" onclick="closeModal('adminAssessmentsModal')" style="cursor:pointer; font-size:24px; color:var(--text-muted);">&times;</span>
+            </div>
+            <div id="adminAssessmentsListContent">
+                <!-- Populated via JS -->
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                <button class="btn-secondary" onclick="closeModal('adminAssessmentsModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Site Footer -->
+    <footer style="
+        background: var(--glass-bg);
+        border-top: 1px solid var(--glass-border);
+        padding: 14px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: var(--text-muted);
+    ">
+        <a href="docs/user_manual.html" style="
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 7px 18px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        " onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            User Manual
+        </a>
+    </footer>
+
+    <script src="js/app.js?v=50"></script>
+</body>
+</html>

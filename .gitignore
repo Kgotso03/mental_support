@@ -1,0 +1,17 @@
+# OS and IDE files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bkp
+*.bak
+~$*
+.$*
+
+# Logs
+*.log
+
+# Sensitive credentials & environment
+.env
+.env.*
+!.env.example
